@@ -15,6 +15,8 @@ module AtreyuAPIRails
       options = resources.extract_options!.dup
       resource = resources.pop.to_s
 
+      puts "resource: #{resource.inspect}, options: #{options.inspect}"
+
       base_actions = [:bulk_index, :count]
       actions = nil
 
@@ -29,9 +31,7 @@ module AtreyuAPIRails
       mapper = self
 
       actions.each do |action|
-        mapper.send("atreyu_resource_#{action}", resource, { to: "#{controller}##{action}" })
-
-        put resource
+        mapper.send("atreyu_resource_#{action}", resource, { to: "#{resource}##{action}" })
       end
 
       resources(*original_resources, &block)
