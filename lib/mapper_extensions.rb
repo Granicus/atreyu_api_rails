@@ -1,11 +1,11 @@
 module AtreyuAPIRails
   module MapperExtensions
-    def bulk_index(resource, opts)
+    def atreyu_resource_bulk_index(resource, opts)
       opts[:to] ||= "#{resource}#bulk_index"
       put resource, opts
     end
 
-    def count(resource, opts)
+    def atreyu_resource_count(resource, opts)
       opts[:to] ||= "#{resource}#count"
       get "#{resource}/count", opts
     end
@@ -29,7 +29,7 @@ module AtreyuAPIRails
       mapper = self
 
       actions.each do |action|
-        mapper.send(action, resource, { to: "#{controller}##{action}" })
+        mapper.send("atreyu_resource_#{action}", resource, { to: "#{controller}##{action}" })
 
         put resource
       end
