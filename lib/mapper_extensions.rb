@@ -7,7 +7,7 @@ module AtreyuAPIRails
 
     def count(resource, opts)
       opts[:to] ||= "#{resource}#count"
-      get resource, opts
+      get "#{resource}/count", opts
     end
 
     def atreyu_resources(*resources, &block)
